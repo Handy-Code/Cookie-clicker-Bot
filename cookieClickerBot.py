@@ -24,7 +24,7 @@ import threading
 
 #NEW STUFF
 import os
-from core import *
+from cookieCore import *
 from cookieGUI import *
 
 
