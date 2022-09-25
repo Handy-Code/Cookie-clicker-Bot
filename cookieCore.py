@@ -1,5 +1,7 @@
 ########## __main__ CHECK ##########
+import string
 import sys
+from turtle import window_height, window_width
 
 if __name__ == '__main__':
     sys.exit('This is not __main__, CookieClickerBot.py should be your __main__, please execute it with admin privileges to prevent errors')
@@ -11,7 +13,7 @@ import time
 import keyboard
 import numpy as np
 import random
-import win32api, win32con
+import win32api, win32con, win32gui
 import threading
 
 import tkinter #Creating a GUI for the bot? Perhaps
@@ -42,8 +44,9 @@ middle and the y as well, then went down 768 (eventhough we are going down we ne
 we go up a bit, to be more precise, 64, which is the actual distance between each upgrade. It will only click each of them once
 """
 def buyUpgrades():
-    for i in range (0,13):
-        click(cursorUpgrade.left+int(cursorUpgrade.width/2),((cursorUpgrade.top+int(cursorUpgrade.height/2)+768-i*64)),1)
+    if cursorUpgrade != None:
+        for i in range (0,13):
+            click(cursorUpgrade.left+int(cursorUpgrade.width/2),((cursorUpgrade.top+int(cursorUpgrade.height/2)+768-i*64)),1)
     
 """
 This is honestly for fancies, cause achievements would pile up and end up obstructing part of the game screen.
@@ -57,7 +60,8 @@ def closeAchievement():
 Turns out there was more upgrades, so this should find "upgradeFrame.png" and buy always the first one, since it's the cheapest one
 """
 def buyOtherUpgrades(a):
-    click(upgradeFrame.left+30,(upgradeFrame.top+int(upgradeFrame.height/2)),a)
+    if upgradeFrame != None:
+        click(upgradeFrame.left+30,(upgradeFrame.top+int(upgradeFrame.height/2)),a)
 
 """
 I haven't had that many golden cookies so I had to find the image on internet and crop it with paint, I don't even know if it works since
@@ -100,6 +104,7 @@ upgradeFrame = pyautogui.locateOnScreen(os.path.join(CWD, "images", "upgradeFram
 #Search for "goldenCookie.png"
 gold = pyautogui.locateOnScreen(os.path.join(CWD, "images", "goldenCookie.png"),grayscale =True,confidence=0.8)
 
+# I guess ill declare the variables here? Check this nacho, bc i dont know where 2 do it
 
 
 
