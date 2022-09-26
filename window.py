@@ -5,7 +5,7 @@ import time
 
 
 
-class Window:
+class window:
     name = 0
     hwnd = 0
     x = 0
@@ -30,9 +30,9 @@ class Window:
     '''
     def WindowFinder(self, windowName):
         timeout = time.time() + 5
-        while self.hwnd == 0 and time.time() < timeout: # This loop and the timeout are here because if there is a title chagin app it will try for 5 seconds to get the name of the tab
-            allWindows = pyautogui.getAllWindows()
-            for window in allWindows:
+        while self.hwnd == 0 and time.time() < timeout:
+            windows = pyautogui.getAllWindows()
+            for window in windows:
                 if windowName in window.title:
                     self.hwnd = win32gui.FindWindow(None, window.title)
         # Timeout just in case the game is closed
@@ -40,8 +40,11 @@ class Window:
             print ("Can't find the window")
         
 
+        
+
+
     '''
-    Coords getter: This fuctions get the window coordinates with the hwnd
+    Coords getter: This fuctions get the window coordinates by having the
     '''
     def WindowCoords(self, hwnd):
         if hwnd != 0:
@@ -50,12 +53,3 @@ class Window:
             self.y = rect[1]
             self.w = rect[2] - self.x
             self.h = rect[3] - self.y
-
-            
-    '''
-    Window resizer: this fuction resizes the window just by having it's hwnd. It also refreshes the self coords
-    '''
-    def WindowResizer(self, x, y ,w ,h):
-        if self.hwnd != 0:
-            win32gui.MoveWindow(self.hwnd, x, y, w, h, True)    #this is the sentence that makes the resize possible
-            self.WindowCoords(self.hwnd)
